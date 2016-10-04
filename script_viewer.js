@@ -30,7 +30,7 @@ var pagecount=0;
 		$('#links').append(''+
 		'<div ID="page'+dat.ID+'" class="list">'+
 		
-'<a href="#'+dat.title+'" onclick = "showelements('+dat.ID+')">'+dat.title+'</a>'+
+'<a href="#'+dat.title+'">'+dat.title+'</a>'+
 '<div id="pagecontrols'+dat.ID+'" class="pagecontrols"></div>'+
 		'</div>');
 pagecount++;
@@ -48,11 +48,11 @@ window.pagebutton(pageID);
 $("#elementlist").html('');
 $(".newelement").html('');
 $(".elementadd").html('');
-$(".headeradd").html('');
+$(".headeradd").html();
 $(".newpage").html('');
 
 $('#title > .edit').html(''+
-'<a href="#" onclick="showButtons('+pageID+'); showEdit('+pageID+');">edit page</a>'+
+'<a href="#" onclick="showButtons('+pageID+'); showEdit('+pageID+'); return false;">edit page</a>'+
 '');
 	var url="data.php?q=elements&s=pageID&x="+pageID;
 	$.getJSON(url,function(json){

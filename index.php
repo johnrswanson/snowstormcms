@@ -17,7 +17,8 @@
 <body>
 
 	<script src="./js/jquery.js" type="text/javascript"></script>
-
+<script src="./js/jquery.ba-hashchange.js" type="text/javascript"></script>
+	
 
 	<script src="./script_viewer.js" type="text/javascript"></script>
 <script src="./script_editor.js"type="text/javascript" ></script>
@@ -46,7 +47,7 @@ window.hello();
 	</script>
 
 <script>
-/*
+
 $(function(){
 $(window).hashchange(function(){
 
@@ -82,7 +83,7 @@ $(window).hashchange();
 });
 
 
-  */
+  
 
 </script>
 

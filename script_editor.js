@@ -7,7 +7,7 @@ window.showButtons= function(pageID){
 var url="data.php?q=pages";
 $.getJSON(url,function(json){
 	$.each(json.data,function(i,edat){
-		$("#pagecontrols"+edat.ID).append(''+
+		$("#pagecontrols"+edat.ID).html(''+
 '<div id="edit'+edat.ID+'" class="editpage"><a href="#" onclick="editthisPage('+edat.ID+'); return false;"><i class="fa fa-gear"></i></a></div>'+
 
 '<div class="deletepage"><a href="#" onclick="deletePage('+edat.ID+'); return false;"><i class="fa fa-times"></i></a></div>');
