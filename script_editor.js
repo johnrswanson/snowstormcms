@@ -10,7 +10,7 @@ $.getJSON(url,function(json){
 		$("#pagecontrols"+edat.ID).html(''+
 '<div id="edit'+edat.ID+'" class="editpage"><a href="#" onclick="editthisPage('+edat.ID+'); return false;"><i class="fa fa-gear"></i></a></div>'+
 
-'<div class="deletepage"><a href="#" onclick="deletePage('+edat.ID+'); return false;"><i class="fa fa-times"></i></a></div>');
+'<div class="deletepage"><a href="#" onclick="confirmdeletePage('+edat.ID+'); return false;"><i class="fa fa-times"></i></a></div>');
 	});
 });
 
@@ -55,7 +55,7 @@ window.showEdit= function(pageID){
 '<div class="stacker"><i class="fa fa-bars"></i></div>'+
 
 '<div class="editor"><a href="#" onclick="editthisElement('+edat.ID+'); return false;"><i class="fa fa-pencil"></i></a></div>'+
-'<div class="trash rightbutton"><a class="" href="#" onclick="deleteElement('+edat.ID+'); return false;">'+
+'<div class="trash rightbutton"><a class="" href="#" onclick="confirmdeleteElement('+edat.ID+'); return false;">'+
 '<i class="fa fa-trash"></i></a></div>'+
 '');
 		});
@@ -81,7 +81,7 @@ window.editthisElement= function(elementID){
 	$("#page").append('<div id="lightbox_element'+elementID+'"></div>');
 	$("#lightbox"+elementID).append(''+
 '<form ID ="editbox">'+
-'<input type="text" name="title" placeholder="Page Title">'+
+'<input type="text" name="title" placeholder="Title">'+
 '</div>');
 
 }
@@ -249,6 +249,19 @@ window.showelements(pageID);
 ////////////////////////////////////////////////////////
 ///////DELETE AJAX TO CONFIRM.PHP
 
+window.confirmdeletePage = function(pageID){
+$("#pagecontrols"+pageID).html('Are you sure? <br><input type="button" value= "Yes" onclick="deletePage('+pageID+');>'+
+' <input type="button" value= "Cancel" onclick="canceldeletePage('+pageID+');>');
+}
+window.canceldeletePage = function(pageID){
+$("#pagecontrols"+pageID).html(''+
+'<div id="edit'+pageID+'" class="editpage"><a href="#" onclick="editthisPage('+pageID+'); return false;"><i class="fa fa-gear"></i></a></div>'+
+
+'<div class="deletepage"><a href="#" onclick="confirmdeletePage('+pageID+'); return false;"><i class="fa fa-times"></i></a></div>');
+	
+
+}
+
 window.deletePage = function(pageID){
 $("#page"+pageID).fadeOut(100);
 
@@ -261,6 +274,26 @@ $.ajax({
 						'x': pageID
             } 
          }); 
+}
+
+window.cacneldeleteElement = function(pageID){
+	$("#edit"+pageID).html(''+
+'<div class="mover"><i class="fa fa-hand"></i></div>'+
+
+'<div class="stacker"><i class="fa fa-bars"></i></div>'+
+
+'<div class="editor"><a href="#" onclick="editthisElement('+pageID+'); return false;"><i class="fa fa-pencil"></i></a></div>'+
+'<div class="trash rightbutton"><a class="" href="#" onclick="confirmdeleteElement('+pageID+'); return false;">'+
+'<i class="fa fa-trash"></i></a></div>'+
+'');
+		});
+	});
+	
+	}
+
+window.confirmdeleteElement = function(pageID){
+$("#edit"+pageID).html('Are you sure? <br><input type="button" value= "Yes" onclick="deleteElememt('+pageID+');>'+
+' <input type="button" value= "Cancel" onclick="canceldeleteElememt('+pageID+');>');
 }
 
 window.deleteElement = function(elementID){
@@ -276,6 +309,9 @@ $.ajax({
             } 
          }); 
 }
+
+
+
 
 }(this));
 
