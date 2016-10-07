@@ -11,9 +11,9 @@
 	<link rel="stylesheet" href="./css/font-awesome.css">
 	<link rel="stylesheet" href="./style.css">
 </head>
-<!--
 
-<a href="javascript:(function()%7B%20var%20fb%20=%20document.createElement('script');%20fb.type%20=%20'text/javascript';%20fb.src%20=%20'https://getfirebug.com/firebug-lite.js%23startOpened';%20document.getElementsByTagName('body')%5B0%5D.appendChild(fb);%20%7D)();">Open Firebug</a>-->
+
+<a href="javascript:(function()%7B%20var%20fb%20=%20document.createElement('script');%20fb.type%20=%20'text/javascript';%20fb.src%20=%20'https://getfirebug.com/firebug-lite.js%23startOpened';%20document.getElementsByTagName('body')%5B0%5D.appendChild(fb);%20%7D)();">Open Firebug</a>
 <body>
 
 	<script src="./js/jquery.js" type="text/javascript"></script>
@@ -38,7 +38,7 @@ window.hello();
 			if( x=='1'){ x='2'; 
 				mydefaultpage = ''+ldat.ID+'';
 			window.showpages(''+mydefaultpage+'');
-				window.showelements(''+ mydefaultpage +'');
+				//window.showelements(''+ mydefaultpage +'');
 			}	
 		});	
 	});
