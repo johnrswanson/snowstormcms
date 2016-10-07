@@ -31,7 +31,7 @@ var pagecount=0;
 		'<div ID="page'+dat.ID+'" class="list">'+
 		
 '<a href="#'+dat.title+'">'+dat.title+'</a>'+
-'<div id="pagecontrols'+dat.ID+'" class="pagecontrols"></div>'+
+'<div ID="pagecontrols'+dat.ID+'" class="pagecontrols"></div>'+
 		'</div>');
 pagecount++;
 	});

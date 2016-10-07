@@ -28,6 +28,8 @@ var container = 'mainpage';
 '<i class="fa fa-plus uibig"></i><br></a>'+
 '</div>'+
 '');
+$('#page').append('<div class="lightbox" id="newbox"></div>');
+
 window.hidepagebuttons();
 }
 
@@ -87,21 +89,20 @@ window.editthisElement= function(elementID){
 }
 
 
-
+//////ADDFORMS
 
 window.newPage = function(){
-
-$('.newelement').html('');
-$('#newelementbox').html('');
-$('#page').append('<div class="lightbox" id="newpagebox"></div>');
-$('#newpagebox').html(''+
+window.hideaddboxes();
+$('#newbox').html(''+
 '<form ID = "addform">'+
+'<input type= "button" onclick="window.hideaddboxes();" value= "x"  id="hidex" class="hidex"><br>'+
 '<input type="text" name="title" placeholder="Page Title">'+
 '<input type="hidden" name="q" value= "pages">'+
 '<input type="hidden" name="a" value= "newpage">'+
 '<br><input type="button" onclick="addtopage(); return false;" name="submit" value ="Add Page">'+
 '</form>'+
 '');
+$("#newbox").css('display','block');
 
 }
 
@@ -116,12 +117,12 @@ $('#newpagebox').html(''+
 //////////////////////////////////////////////////////////
 ///NEW ELEMENT FORM
 window.newElement = function(pageID, container){
+window.hideaddboxes();
  var container='mainpage'; 
-$('.newpage').html('');
-$('#newpagebox').html('');
+$('#newbox').html(''+
 
-$('#page').append('<div class="lightbox" id="newelementbox"></div>');
-$('#newelementbox').html(''+
+'<form ID = "addform" enctype="multipart/form-data">'+
+'<input type= "button" onclick="window.hideaddboxes();" value= "x" id="hidex" class="hidex"><br>'+
 
 '<a href="#" onclick="newPhoto('+pageID+'); return false;">'+
 '<i class="fa fa-camera"><br>Photo</i>'+
@@ -135,8 +136,10 @@ $('#newelementbox').html(''+
 '<a href="#" onclick="newBox('+pageID+'); return false;">'+
 '<i class="fa fa-th"><br>Box</i>'+
 '</a> '+
+'<br><div class="formcontents"></div></form>');
 
-'<br><form ID = "addform" enctype="multipart/form-data"></form>');
+$("#newbox").css('display','block');
+
 }
 
 
@@ -144,7 +147,7 @@ $('#newelementbox').html(''+
 //////////////////////////////////////////////////////////
 ///NEW PHOTO FORM
 window.newPhoto= function(pageID, container){
-$('#addform').html(''+
+$('#addform > .formcontents').html(''+
 '<input type="file" name="file" accept="image/*;capture=camera">'+
 '<input type="hidden" name="type" value= "photo">'+
 '<input type="hidden" name="a" value= "newelement">'+
@@ -157,7 +160,8 @@ $('#addform').html(''+
 //////////////////////////////////////////////////////////
 ///NEW TEXT FORM
 window.newText = function(pageID, container){
-$('#addform').html(''+
+
+$('#addform > .formcontents').html(''+
 
 '<input type="hidden" name="type" value= "text">'+
 '<textarea name="mytext" style="width: 80%; min-height: 200px" placeholder="Enter Text"></textarea>'+
@@ -183,14 +187,15 @@ $('#addform').html(''+
 
 '');
 
-}
 
+}
+/*
 //////////////////////////////////////////////////////////
 ///NEW DIV FORM
 
 window.newDiv = function(pageID, container){
 
-$('#addform').html(''+
+$('#addform' > .formcontents').html(''+
 
 '<input type="hidden" name="container" value= "'+container+'">'+
 '<input type="text" name="height" value="1000px" placeholder="Enter Div Height">'+
@@ -203,6 +208,7 @@ $('#addform').html(''+
 '<input type="hidden" name="pageID" value= "'+pageID+'">'+
 '<input type="button" onclick="addtopage('+pageID+');" name="submit" value ="Add Div">'+
 '');
+
 }
 
 
@@ -210,7 +216,8 @@ $('#addform').html(''+
 //////////////////////////////////////////////////////////
 ///NEW Box FORM
 window.newBox= function(pageID, container){
-$('#addform').html(''+
+
+$('#addform > .formcontents').html(''+
 '<input type="text" name="title" placeholder="Title for Box">'+
 '<input type="hidden" name="type" value= "box">'+
 '<input type="hidden" name="a" value= "newelement">'+
@@ -218,9 +225,10 @@ $('#addform').html(''+
 '<input type="hidden" name="q" value= "elements">'+
 '<input type="hidden" name="pageID" value= "'+pageID+'">'+
 '<input type="button" onclick="addtopage('+pageID+');" name="submit" value ="Add Box">');
+
 }
 
-
+*/
 
 ///////////////////////////////////////////////////
 //////ADD PAGES / ELEMENTS AJAX TO CONFIRM.PHP
@@ -238,10 +246,18 @@ var mydata = new FormData($("#addform")[0]);
 	}).done(function(){
 			window.showpages(pageID);
 window.showelements(pageID);
+window.hideaddboxes();
 			});
-	}
 
+}
 
+window.hideaddboxes= function(){
+
+$('.newelement').html('');
+$('#newbox').html('').css('display','none');
+$('.newpage').html('');
+
+}
 
 
 
@@ -250,14 +266,14 @@ window.showelements(pageID);
 ///////DELETE AJAX TO CONFIRM.PHP
 
 window.confirmdeletePage = function(pageID){
-$("#pagecontrols"+pageID).html('Are you sure? <br><input type="button" value= "Yes" onclick="deletePage('+pageID+');">'+
-' <input type="button" value= "Cancel" onclick="canceldeletePage('+pageID+');">');
+$("#pagecontrols"+pageID).html('Delete Page? <br><input type="button" value= "Yes" onclick="deletePage('+pageID+');">'+
+' <input type="button" value= "Cancel" onclick="canceldeletePage('+pageID+');">').css('background','#f44');
 }
 window.canceldeletePage = function(pageID){
 $("#pagecontrols"+pageID).html(''+
 '<div id="edit'+pageID+'" class="editpage"><a href="#" onclick="editthisPage('+pageID+'); return false;"><i class="fa fa-gear"></i></a></div>'+
 
-'<div class="deletepage"><a href="#" onclick="confirmdeletePage('+pageID+'); return false;"><i class="fa fa-times"></i></a></div>');
+'<div class="deletepage"><a href="#" onclick="confirmdeletePage('+pageID+'); return false;"><i class="fa fa-times"></i></a></div>').css('background','none');
 	
 
 }
@@ -285,12 +301,12 @@ window.canceldeleteElement = function(pageID){
 '<div class="editor"><a href="#" onclick="editthisElement('+pageID+'); return false;"><i class="fa fa-pencil"></i></a></div>'+
 '<div class="trash rightbutton"><a class="" href="#" onclick="confirmdeleteElement('+pageID+'); return false;">'+
 '<i class="fa fa-trash"></i></a></div>'+
-'');
+'').css('background','none');;
 }
 
 window.confirmdeleteElement = function(pageID){
-$("#edit"+pageID).html('Are you sure? <br><form><input type="button" value= "Yes" onclick="deleteElement('+pageID+');">'+
-'<input type="button" value= "Cancel" onclick="canceldeleteElement('+pageID+');"></form>');
+$("#edit"+pageID).html('Delete now?<br><form><input type="button" value= "Yes" onclick="deleteElement('+pageID+');">'+
+'<input type="button" value= "Cancel" onclick="canceldeleteElement('+pageID+');"></form>').css('background','#f44');;
 }
 
 window.deleteElement = function(elementID){
