@@ -250,8 +250,8 @@ window.showelements(pageID);
 ///////DELETE AJAX TO CONFIRM.PHP
 
 window.confirmdeletePage = function(pageID){
-$("#pagecontrols"+pageID).html('Are you sure? <br><input type="button" value= "Yes" onclick="deletePage('+pageID+');>'+
-' <input type="button" value= "Cancel" onclick="canceldeletePage('+pageID+');>');
+$("#pagecontrols"+pageID).html('Are you sure? <br><input type="button" value= "Yes" onclick="deletePage('+pageID+');">'+
+' <input type="button" value= "Cancel" onclick="canceldeletePage('+pageID+');">');
 }
 window.canceldeletePage = function(pageID){
 $("#pagecontrols"+pageID).html(''+
@@ -276,7 +276,7 @@ $.ajax({
          }); 
 }
 
-window.cacneldeleteElement = function(pageID){
+window.canceldeleteElement = function(pageID){
 	$("#edit"+pageID).html(''+
 '<div class="mover"><i class="fa fa-hand"></i></div>'+
 
@@ -286,14 +286,11 @@ window.cacneldeleteElement = function(pageID){
 '<div class="trash rightbutton"><a class="" href="#" onclick="confirmdeleteElement('+pageID+'); return false;">'+
 '<i class="fa fa-trash"></i></a></div>'+
 '');
-		});
-	});
-	
-	}
+}
 
 window.confirmdeleteElement = function(pageID){
-$("#edit"+pageID).html('Are you sure? <br><input type="button" value= "Yes" onclick="deleteElememt('+pageID+');>'+
-' <input type="button" value= "Cancel" onclick="canceldeleteElememt('+pageID+');>');
+$("#edit"+pageID).html('Are you sure? <br><form><input type="button" value= "Yes" onclick="deleteElement('+pageID+');">'+
+'<input type="button" value= "Cancel" onclick="canceldeleteElement('+pageID+');"></form>');
 }
 
 window.deleteElement = function(elementID){
