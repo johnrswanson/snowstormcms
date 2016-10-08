@@ -11,7 +11,6 @@ window.hello = function(){
 '</div>'+
 '<div ID="pagecontent">'+
 '<div ID="elementlist"></div>'+
-'<div class="elementadd"></div>'+
 '<div class="newelement"></div>'+
 '</div>'+
 '');
@@ -53,14 +52,11 @@ window.showelements= function(pageID){
 window.hidepagebuttons();
 window.pagebutton(pageID);
 $("#elementlist").html('');
-$(".newelement").html('');
 $(".elementadd").html('');
 $(".headeradd").html();
 $(".newpage").html('');
 
-$('#title > .edit').html(''+
-'<a href="#" onclick="showButtons('+pageID+'); showEdit('+pageID+'); return false;">edit page</a>'+
-'');
+
 	var url="data.php?q=elements&s=pageID&x="+pageID;
 	$.getJSON(url,function(json){
 	$.each(json.data,function(i,edat){
