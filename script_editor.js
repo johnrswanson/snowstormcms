@@ -2,25 +2,35 @@
 
 
 
-window.showButtons= function(pageID){
+window.showButtons= function(){
 
 var url="data.php?q=pages";
 $.getJSON(url,function(json){
 	$.each(json.data,function(i,edat){
 		$("#pagecontrols"+edat.ID).html(''+
-'<div id="edit'+edat.ID+'" class="editpage"><a href="#" onclick="editthisPage('+edat.ID+'); return false;"><i class="fa fa-gear"></i></a></div>'+
-
+'<div id="edit'+edat.ID+'" class="editpage"><a onclick="editthisPage('+edat.ID+'); return false;"><i class="fa fa-gear"></i></a></div>'+
+'<div class="addtopage"><a href="#" onclick="newElement('+edat.ID+'); return false"><i class="fa fa-plus-circle"></i></a></div>'+
+'<div class="editpage"><a href="#" onclick="showEdit('+edat.ID+'); return false"><i class="fa fa-pencil"></i></a></div>'+
 '<div class="deletepage"><a href="#" onclick="confirmdeletePage('+edat.ID+'); return false;"><i class="fa fa-times"></i></a></div>');
+
 	});
 });
+window.hidepagebuttons();
 
-
-	$('.headeradd').html(''+
+$('.headeradd').html(''+
 '<div class="addbutton">'+
 '<a href= "#" onclick="newPage(); return false;"> '+
 '<i class="fa fa-file uibig"></i><div class="buttontitle">New</div></a>'+
 '</div>'+
 '');
+$('#page').append('<div class="lightbox" id="newbox"></div>');
+
+}
+
+
+//////BUTTON FOR ADD ELEMENT TO PAGE 
+
+window.showplus=function(pageID){
 var container = 'mainpage';
 	$('.elementadd').html(''+
 '<div class="addbutton">'+
@@ -28,23 +38,16 @@ var container = 'mainpage';
 '<i class="fa fa-plus uibig"></i><br></a>'+
 '</div>'+
 '');
-$('#page').append('<div class="lightbox" id="newbox"></div>');
-
-window.hidepagebuttons();
-}
 
 
 
-window.editElement= function(elementID){
-	$("#page").append('<div id="lightbox'+elementID+'"></div>');
-	$("#lightbox"+elementID).append(''+
-'<form ID ="editbox">'+
-'<input type="text" name="mytext" placeholder="">'+
-'<input type="text" name="mytext" placeholder="">'+
-'</div>');
 
 }
 
+
+
+
+////LOAD EDIT BUTTONS//////////////////////////
 
 
 window.showEdit= function(pageID){
@@ -71,19 +74,43 @@ window.hideelementbuttons();
 
 
 
-window.editthisPage= function(pageID){
-	$("#page").append('<div id="lightbox_page'+pageID+'"></div>');
-	$("#lightbox"+elementID).append(''+
-'<form ID ="editbox">'+
-'<input type="text" name="title" placeholder="Page Title">'+
-'</div>');
+//////EDIT PAGE/////////
+
+
+window.editthisPage = function(pageID){
+	$("#page").append('<div id="lightboxpage'+pageID+'" class="lightbox"></div>');
+	$("#lightboxpage"+pageID).append(''+
+'<form ID ="editbox">Page Settings<br></form>');
+
+var url="data.php?q=pages&s=ID&x="+pageID;
+	$.getJSON(url,function(json){
+		$.each(json.data,function(i,dat){
+	$("#editbox").append(''+
+'<input type="text" name="title" value="'+dat.title+'" placeholder="Page Title">'+
+'<input type="text" name="background" placeholder="Background Color">'+
+'').fadeIn();
+
+});
+});
+
+
 }
+
+
+
+
+
+
+///////EDIT ELEMENT///////
+
+
+
 
 
 window.editthisElement= function(elementID){
 	$("#page").append('<div id="lightbox_element'+elementID+'"></div>');
-	$("#lightbox"+elementID).append(''+
-'<form ID ="editbox">'+
+	$("#lightbox"+elementID).html(''+
+'<form ID ="editbox">Edit Element<br>'+
 '<input type="text" name="title" placeholder="Title">'+
 '</div>');
 
@@ -273,6 +300,8 @@ $("#pagecontrols"+pageID).html('Delete Page? <br><input type="button" value= "Ye
 window.canceldeletePage = function(pageID){
 $("#pagecontrols"+pageID).html(''+
 '<div id="edit'+pageID+'" class="editpage"><a href="#" onclick="editthisPage('+pageID+'); return false;"><i class="fa fa-gear"></i></a></div>'+
+'<div class="addtopage"><a href="#" onclick="newElement('+pageID+'); return false"><i class="fa fa-plus-circle"></i></a></div>'+
+'<div class="elementedit"><a href="#" onclick="showEdit('+pageID+'); return false"><i class="fa fa-pencil"></i></a></div>'+
 
 '<div class="deletepage"><a href="#" onclick="confirmdeletePage('+pageID+'); return false;"><i class="fa fa-times"></i></a></div>').css('background','none');
 	
@@ -325,9 +354,14 @@ $.ajax({
 }
 
 
-
-
 }(this));
+
+
+
+$(document).ready(function(){
+$("#editnow").click();
+
+});
 
 
 
