@@ -4,6 +4,7 @@ window.hello = function(){
 	$('#page').html(''+
 	'<div ID="title">localhost<div class="edit"></div></div>'+
 	'<div ID="header">'+
+'<div id="burger"><a href="#" onclick="showmenu(); return false;"><i class="fa fa-bars"></i></a></div> '+
 '<div id="links"></div> '+
 '<div class="headeradd"></div>'+
 '<div class="newpage"></div>'+
@@ -17,6 +18,10 @@ window.hello = function(){
 }
 
 
+window.showmenu= function(pageID){
+$("#links").toggle(1000);
+}
+
 
 window.showpages= function(pageID){
 $('#links').html('');
@@ -27,10 +32,12 @@ $('#links').html('');
 	$.getJSON(url,function(json){
 var pagecount=0;
 	$.each(json.data,function(i,dat){
+var title=dat.title;
+if(title==''){title="Untitled page";}
 		$('#links').append(''+
 		'<div ID="page'+dat.ID+'" class="list">'+
 		
-'<a href="#'+dat.title+'">'+dat.title+'</a>'+
+'<a href="#'+dat.title+'">'+title+'</a>'+
 '<div ID="pagecontrols'+dat.ID+'" class="pagecontrols"></div>'+
 		'</div>');
 pagecount++;
@@ -58,7 +65,7 @@ $('#title > .edit').html(''+
 	$.getJSON(url,function(json){
 	$.each(json.data,function(i,edat){
 		$("#elementlist").append(''+
-		'<div ID="element'+edat.ID+'">'+
+		'<div ID="element'+edat.ID+'" onclick ="window.elementbutton('+edat.ID+');">'+
 		'<div ID="edit'+edat.ID+'" class="editbar">'+
 		'</div>'+	
 		'<div id="photo'+edat.ID+'"></div>'+
@@ -72,8 +79,16 @@ $('#title > .edit').html(''+
 			'<img src="./img/full/'+edat.photo+'" width="100%">'+
 			'');
 }
+
+/////edit button click function here
+//$("element'+edat.ID+'").click(function()
+//{
+//window.elementbutton('+edat.ID+');
+//}
+//);
 	});
 	});
+window.hideelementbuttons();
 }
 
 
@@ -81,9 +96,36 @@ window.pagebutton= function(pageID){
 $("#pagecontrols"+pageID).slideDown();
 
 }
+
+
+
+
+window.elementbutton= function(elementID){
+window.hideelementbuttons();
+$("#edit"+elementID).slideDown();
+
+}
+
+
+
 window.hidepagebuttons= function(){
 $(".pagecontrols").slideUp('');
 }
+
+
+
+
+
+window.hideelementbuttons= function(){
+$(".editbar").slideUp('');
+}
+
+
+
+
+
+
+
 
 /*
 myfonts = array(
