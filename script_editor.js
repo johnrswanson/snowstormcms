@@ -62,6 +62,7 @@ window.showEdit= function(pageID){
 '');
 		});
 	});
+window.hideelementbuttons();
 }
 
 
