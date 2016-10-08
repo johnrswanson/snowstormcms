@@ -13,6 +13,7 @@ html, body{margin:0px; padding:0px; }
 .trash{float: left; font-size:40px;}
 .mover{float: left; font-size:40px;}
 .stacker{float: left; font-size:40px;}
+.addtopage{float: left; font-size:30px; margin-right:20px;}
 .editor{float: left; font-size:40px;}
 #title{
 width: 100%; text-align: center; background: #666; padding: 10px 0px 10px 0px; color: #fff; display:block;}
