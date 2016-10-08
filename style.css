@@ -7,9 +7,10 @@ html, body{margin:0px; padding:0px; }
 .list a{color: #fff; text-decoration:none;}
 
 .list a{color: #ddd;}
-.editpage{float:left; margin-right: 20px; font-size:30px;}
+.editpage{float:left; z-index: 10000; margin-right: 20px; font-size:30px;}
 .deletepage{float:left; font-size:30px;}
-.editbar{float: left; width: 100%;}
+.editbar{float: left; position: fixed;  border-radius: 40px; color:#fff;width: 100%; padding-left: 10px; padding-right: 10px; background:#333; opacity: 0.8; width: 50%; margin: auto; margin-top: -20px;}
+.editbar a{color:#fff;}
 .trash{float: left; font-size:40px;}
 .mover{float: left; font-size:40px;}
 .stacker{float: left; font-size:40px;}
