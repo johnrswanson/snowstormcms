@@ -89,7 +89,7 @@ window.hideelementbuttons();
 
 
 window.pagebutton= function(pageID){
-$("#pagecontrols"+pageID).slideDown();
+$("#pagecontrols"+pageID).slideDown(0);
 
 }
 
@@ -98,14 +98,14 @@ $("#pagecontrols"+pageID).slideDown();
 
 window.elementbutton= function(elementID){
 window.hideelementbuttons();
-$("#edit"+elementID).slideDown();
+$("#edit"+elementID).slideDown(0);
 
 }
 
 
 
 window.hidepagebuttons= function(){
-$(".pagecontrols").slideUp('');
+$(".pagecontrols").slideUp(0);
 }
 
 
@@ -113,7 +113,7 @@ $(".pagecontrols").slideUp('');
 
 
 window.hideelementbuttons= function(){
-$(".editbar").slideUp('');
+$(".editbar").slideUp(0);
 }
 
 

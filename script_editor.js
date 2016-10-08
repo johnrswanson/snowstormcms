@@ -80,12 +80,12 @@ window.hideelementbuttons();
 window.editthisPage = function(pageID){
 	$("#pagecontrols"+pageID).html(''+
 '<div style="border-bottom: solid 1px #fff; color:fff;font-family:helvetica ">Page Settings<div>'+
-'<form ID ="editbox"></form>');
+'<form ID ="editbox'+pageID+'"></form>');
 
 var url="data.php?q=pages&s=ID&x="+pageID;
 	$.getJSON(url,function(json){
 		$.each(json.data,function(i,dat){
-	$("#editbox").append(''+
+	$("#editbox"+pageID).append(''+
 'Title<br><input type="text" name="title" value="'+dat.title+'" placeholder="Page Title"><br>'+
 'Background Color<br><input type="text" name="background" placeholder="Background Color"><br>'+
 '<input type="button" value="Save"> <a style="font-size: 14px; margin-right: 20px; color: #ddd;" href="#" onclick="canceldeletePage('+pageID+'); return false;">Cancel</a> '+
@@ -336,8 +336,8 @@ window.canceldeleteElement = function(pageID){
 }
 
 window.confirmdeleteElement = function(pageID){
-$("#edit"+pageID).html('Delete now?<br><form><input type="button" value= "Yes" onclick="deleteElement('+pageID+');">'+
-'<input type="button" value= "Cancel" onclick="canceldeleteElement('+pageID+');"></form>').css('background','#f44');;
+$("#edit"+pageID).html('<center>Delete now?<br><form><input type="button" value= "Yes" onclick="deleteElement('+pageID+');">'+
+'<input type="button" value= "Cancel" onclick="canceldeleteElement('+pageID+');"></form></center>').css('background','#f44');
 }
 
 window.deleteElement = function(elementID){

@@ -1,8 +1,8 @@
 html, body{margin:0px; padding:0px; }
 
-#page{width:90% max-width: 1000px; margin: auto; min-height: 0px; background: #eee; box-shadow: 1px 1px 10px 1px #000; }
+#page{width:90% max-width: 1000px; margin: auto; min-height: 0px; background: #eee; box-shadow: 1px 1px 10px 1px #000; position: relative; z-index: 1; }
 
-.list{width: auto;   margin-left: 20px; float:left; padding: 1%; background: #444; margin: 1%;  }
+.list{position: relative; z-index: 10; width: auto;   margin-left: 20px; float:left; padding: 1%; background: #444; margin: 1%;  }
 
 .list a{color: #fff; text-decoration:none;}
 
@@ -20,8 +20,10 @@ html, body{margin:0px; padding:0px; }
 width: 100%; text-align: center; background: #666; padding: 10px 0px 10px 0px; color: #fff; display:block;}
 
 #header{width: 100%;   height: 70px; padding: 0%; background: #444; margin:auto: margin-top: 1%; }
+.pagecontrols{ text-align: center position: fixed; z-index:200000; background: #444; opacity: 0.8;}
 
-#pagecontent{clear:both; width:100%;   padding: 0%; background: #def; margin:auto: margin-top: 1%;}
+.pagecontrols input{margin: 10px; }
+#pagecontent{clear:both; width:100%;  padding: 0%; background: #def; margin:auto: margin-top: 1%;}
 
 .fa-remove{float:right;}
 a .fa-bars{color#777;}
