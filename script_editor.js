@@ -78,16 +78,17 @@ window.hideelementbuttons();
 
 
 window.editthisPage = function(pageID){
-	$("#page").append('<div id="lightboxpage'+pageID+'" class="lightbox"></div>');
-	$("#lightboxpage"+pageID).append(''+
-'<form ID ="editbox">Page Settings<br></form>');
+	$("#pagecontrols"+pageID).html(''+
+'<div style="border-bottom: solid 1px #fff; color:fff;font-family:helvetica ">Page Settings<div>'+
+'<form ID ="editbox"></form>');
 
 var url="data.php?q=pages&s=ID&x="+pageID;
 	$.getJSON(url,function(json){
 		$.each(json.data,function(i,dat){
 	$("#editbox").append(''+
-'<input type="text" name="title" value="'+dat.title+'" placeholder="Page Title">'+
-'<input type="text" name="background" placeholder="Background Color">'+
+'Title<br><input type="text" name="title" value="'+dat.title+'" placeholder="Page Title"><br>'+
+'Background Color<br><input type="text" name="background" placeholder="Background Color"><br>'+
+'<input type="button" value="Save"> <a style="font-size: 14px; margin-right: 20px; color: #ddd;" href="#" onclick="canceldeletePage('+pageID+'); return false;">Cancel</a> '+
 '').fadeIn();
 
 });
@@ -301,7 +302,7 @@ window.canceldeletePage = function(pageID){
 $("#pagecontrols"+pageID).html(''+
 '<div id="edit'+pageID+'" class="editpage"><a href="#" onclick="editthisPage('+pageID+'); return false;"><i class="fa fa-gear"></i></a></div>'+
 '<div class="addtopage"><a href="#" onclick="newElement('+pageID+'); return false"><i class="fa fa-plus-circle"></i></a></div>'+
-'<div class="elementedit"><a href="#" onclick="showEdit('+pageID+'); return false"><i class="fa fa-pencil"></i></a></div>'+
+'<div class="editpage"><a href="#" onclick="showEdit('+pageID+'); return false"><i class="fa fa-pencil"></i></a></div>'+
 
 '<div class="deletepage"><a href="#" onclick="confirmdeletePage('+pageID+'); return false;"><i class="fa fa-times"></i></a></div>').css('background','none');
 	
@@ -331,7 +332,7 @@ window.canceldeleteElement = function(pageID){
 '<div class="editor"><a href="#" onclick="editthisElement('+pageID+'); return false;"><i class="fa fa-pencil"></i></a></div>'+
 '<div class="trash rightbutton"><a class="" href="#" onclick="confirmdeleteElement('+pageID+'); return false;">'+
 '<i class="fa fa-trash"></i></a></div>'+
-'').css('background','none');;
+'').css('background','#333');
 }
 
 window.confirmdeleteElement = function(pageID){
