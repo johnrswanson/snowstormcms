@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="./css/jqueryui.css">
 	<link rel="stylesheet" href="./css/font-awesome.css">
 	<link rel="stylesheet" href="./style.css">
+	<link rel="stylesheet" href="./css/spectrum.css">
 </head>
 
 
@@ -19,8 +20,11 @@
 	<script src="./js/jquery.js" type="text/javascript"></script>
 <script src="./js/jquery.ba-hashchange.js" type="text/javascript"></script>
 	
-
 	<script src="./script_viewer.js" type="text/javascript"></script>
+
+<script src="./js/spectrum.js" type="text/javascript"></script>
+	
+
 <?
 
 include('./connect.php');
