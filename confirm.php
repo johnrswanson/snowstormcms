@@ -58,6 +58,40 @@ echo '<br>Action completed : Page Added';
 
 }
 
+if($a=='savePage'){
+
+
+$query = "UPDATE pages SET title='".$title."' WHERE ID =".$x."";
+	$dbh->query( $query );
+
+$query = "UPDATE pages SET background='".$background."' WHERE ID =".$x."";
+	$dbh->query( $query );
+
+echo '<br>Action completed : Page #".$x." Edited';
+
+}
+
+//if($a=='reorderPage'){
+
+//reorder navigation links	
+$myaction = $_POST['myaction']; 
+echo $myaction.' <br>';
+$updatepage = $_POST['pageArray'];
+if ($myaction == "updatePageOrder"){
+	$pageCounter = 1;
+	foreach ($updatepage as $value) {
+		//mysq$updatenow=mysql_query("UPDATE pages SET pageorder = '$pageCounter' WHERE ID = '$value'")or die(mysql_error('Page order was not updated in DB'));
+$query = "UPDATE pages SET pageorder='".$pageCounter."' WHERE ID =".$value."";
+	$dbh->query( $query );
+		$pageCounter = $pageCounter + 1;	
+	}
+	echo '<pre>';
+	print_r($updateRecordsArray);
+	echo '</pre>';
+	echo 'Page Order Saved';
+}
+
+//}
 
 
 if($a=='newelement'){

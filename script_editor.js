@@ -23,8 +23,18 @@ $('.headeradd').html(''+
 '<i class="fa fa-file uibig"></i><div class="buttontitle">New</div></a>'+
 '</div>'+
 '');
+
 $('#page').append('<div class="lightbox" id="newbox"></div>');
 
+	$("#links > ul").sortable({ cursorAt:{left: 0},
+			opacity: 0.6,  forcePlaceholderSize: true, delay: 20, distance: 20, forceHelperSize: true, cursor: 'move',
+			update: function() {
+				var pageorder = $(this).sortable("serialize") + '&myaction=updatePageOrder'; 
+				$.post("confirm.php", pageorder, function(theResponse){		
+				
+				});
+			}
+		});
 }
 
 
@@ -87,17 +97,49 @@ var url="data.php?q=pages&s=ID&x="+pageID;
 		$.each(json.data,function(i,dat){
 	$("#editbox"+pageID).append(''+
 'Title<br><input type="text" name="title" value="'+dat.title+'" placeholder="Page Title"><br>'+
-'Background Color<br><input type="text" name="background" placeholder="Background Color"><br>'+
-'<input type="button" value="Save"> <a style="font-size: 14px; margin-right: 20px; color: #ddd;" href="#" onclick="canceldeletePage('+pageID+'); return false;">Cancel</a> '+
+
+'<input type="hidden" name="q" value="pages">'+
+'<input type="hidden" name="a" value="savePage">'+
+'<input type="hidden" name="x" value="'+pageID+'">'+
+
+'Background Color<br><input type="text" ID="pagebg'+pageID+'" value="'+dat.background+'" name="background"><br>'+
+'<input type="button" value="Save" onclick="savePage('+pageID+'); return false"> '+
+'<a style="font-size: 14px; margin-right: 20px; color: #ddd;" href="#" onclick="canceldeletePage('+pageID+'); return false;">Cancel</a> '+
 '').fadeIn();
 
-});
-});
+$("#pagebg"+pageID).spectrum({
+	   showButtons:true,
+	    showInput:true,
+		showInitial:true,
+		preferredFormat: "hex"
+		});
 
+});
+});
 
 }
 
 
+
+
+window.savePage = function(pageID){
+
+var mydata = new FormData($("#editbox"+pageID)[0]);
+		$.ajax({
+			'url' : "confirm.php",
+			'type' : 'post',
+			'data' : mydata,
+			processData: false,
+			contentType: false,
+			beforeSend: function(XHR){
+			}
+	}).done(function(){
+			window.showpages(pageID);
+window.showelements(pageID);
+window.hideaddboxes();
+			});
+
+}
 
 
 
@@ -304,7 +346,7 @@ $("#pagecontrols"+pageID).html(''+
 '<div class="addtopage"><a href="#" onclick="newElement('+pageID+'); return false"><i class="fa fa-plus-circle"></i></a></div>'+
 '<div class="editpage"><a href="#" onclick="showEdit('+pageID+'); return false"><i class="fa fa-pencil"></i></a></div>'+
 
-'<div class="deletepage"><a href="#" onclick="confirmdeletePage('+pageID+'); return false;"><i class="fa fa-times"></i></a></div>').css('background','none');
+'<div class="deletepage"><a href="#" onclick="confirmdeletePage('+pageID+'); return false;"><i class="fa fa-times"></i></a></div>').css('background','#333');
 	
 
 }

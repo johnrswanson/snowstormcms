@@ -18,8 +18,9 @@
 
 
 	<script src="./js/jquery.js" type="text/javascript"></script>
+<script src="./js/jquery-ui.js" type="text/javascript"></script>
 <script src="./js/jquery.ba-hashchange.js" type="text/javascript"></script>
-	
+	<script src="./js/touchpunch.js" type="text/javascript"></script>	
 	<script src="./script_viewer.js" type="text/javascript"></script>
 
 <script src="./js/spectrum.js" type="text/javascript"></script>
@@ -143,6 +144,7 @@ $(window).hashchange();
   
 
 </script>
+<style></style>
 
 </body>
 </html>

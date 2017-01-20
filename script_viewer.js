@@ -2,6 +2,7 @@
 
 window.hello = function(){
 	$('#page').html(''+
+'<div id="fullbg"></div> '+
 	'<div ID="title">localhost<div class="edit"></div></div>'+
 	'<div ID="header">'+
 '<div id="burger"><a href="#" onclick="showmenu(); return false;"><i class="fa fa-bars"></i></a></div> '+
@@ -23,32 +24,41 @@ $("#links").toggle(1000);
 
 
 window.showpages= function(pageID){
-$('#links').html('');
+$('#links').html('<ul></ul>');
 
 
-	var url="data.php?q=pages";
+	var url="data.php?q=pages&o=pageorder";
 
 	$.getJSON(url,function(json){
 var pagecount=0;
 	$.each(json.data,function(i,dat){
 var title=dat.title;
 if(title==''){title="Untitled page";}
-		$('#links').append(''+
-		'<div ID="page'+dat.ID+'" class="list">'+
+		$('#links > ul').append(''+
+		'<li ID="pageArray_'+dat.ID+'" class="list">'+
 		
 '<a href="#'+dat.title+'">'+title+'</a>'+
 '<div ID="pagecontrols'+dat.ID+'" class="pagecontrols"></div>'+
-		'</div>');
+		'</li>');
 pagecount++;
 	});
 if(pagecount==0){newpage();}
 	});
 
+var linkwidth= 100/ pagecount;
+			
+			$("#links").append(''+
+			'<style>.list{width:'+linkwidth+'%; float:left; text-align:center;}</style>'+
+			'');
+		//});//get
+		
 
 
 }
 
 window.showelements= function(pageID){
+
+
 window.hidepagebuttons();
 window.pagebutton(pageID);
 $("#elementlist").html('');
@@ -56,6 +66,17 @@ $(".elementadd").html('');
 $(".headeradd").html();
 $(".newpage").html('');
 
+
+
+
+	var url="data.php?q=pages&s=ID&x="+pageID;
+	$.getJSON(url,function(json){
+	$.each(json.data,function(i,edat){
+
+$("#fullbg").css("background",""+edat.background+"");
+
+});
+});
 
 	var url="data.php?q=elements&s=pageID&x="+pageID;
 	$.getJSON(url,function(json){
